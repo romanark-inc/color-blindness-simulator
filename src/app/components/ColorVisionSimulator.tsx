@@ -1,6 +1,4 @@
 "use client";
-
-import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import {
   ColorVisionType,
@@ -8,8 +6,6 @@ import {
 } from "../util/colorVisionSimulation";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Label } from "@radix-ui/react-label";
-import { generateColorVariations } from "../util/colorUtils";
 const colorVisionTypes: ColorVisionType[] = [
   "normal",
   "protanopia",
@@ -26,7 +22,6 @@ export default function ColorPalette() {
     "#FFFF00",
     "#FF00FF",
   ]);
-  const [currentColor, setCurrentColor] = useState("#000000");
 
   const handleColorChange = (index: number, color: string) => {
     const newColors = [...colors];
@@ -34,31 +29,10 @@ export default function ColorPalette() {
     setColors(newColors);
   };
 
-  const handleAddColor = () => {
-    if (colors.length < 5) {
-      setColors([...colors, currentColor]);
-      setCurrentColor("#000000");
-    }
-  };
-
   return (
     <div className='p-4'>
       <h1 className='text-2xl font-bold mb-4'>Webデザインカラーパレット</h1>
-      <div className='mb-4 flex items-end space-x-2'>
-        <div>
-          <Label htmlFor='colorPicker'>新しい色を追加：</Label>
-          <Input
-            type='color'
-            id='colorPicker'
-            value={currentColor}
-            onChange={(e) => setCurrentColor(e.target.value)}
-            className='w-full h-12 mt-2'
-          />
-        </div>
-        <Button onClick={handleAddColor} disabled={colors.length >= 5}>
-          色を追加
-        </Button>
-      </div>
+
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mb-8'>
         {colors.map((color, index) => (
           <Card key={index}>
